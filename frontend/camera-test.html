@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Test - ArogyaMitra</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #a855f7;
+        }
+        video {
+            width: 100%;
+            max-width: 640px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        button {
+            background: linear-gradient(to right, #a855f7, #22c55e);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #22c55e20;
+            border: 1px solid #22c55e;
+            color: #22c55e;
+        }
+        .error {
+            background: #ef444420;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+        .info {
+            background: #3b82f620;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+        }
+        pre {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Camera Test - ArogyaMitra</h1>
+        <p>This page tests if your camera works in the browser.</p>
+
+        <div id="status"></div>
+
+        <video id="video" autoplay playsinline muted></video>
+
+        <div>
+            <button onclick="startCamera()">Start Camera</button>
+            <button onclick="stopCamera()">Stop Camera</button>
+            <button onclick="checkPermissions()">Check Permissions</button>
+        </div>
+
+        <h2>Debug Info</h2>
+        <pre id="debug"></pre>
+
+        <h2>Instructions</h2>
+        <ol>
+            <li>Click "Start Camera" button</li>
+            <li>Allow camera access when prompted</li>
+            <li>You should see your camera feed above</li>
+            <li>If it works here, it will work in the app!</li>
+        </ol>
+
+        <h2>Common Issues</h2>
+        <ul>
+            <li><strong>Permission denied:</strong> Click the lock icon in address bar and allow camera</li>
+            <li><strong>Not secure context:</strong> Use https:// or localhost</li>
+            <li><strong>Camera in use:</strong> Close other apps using camera (Zoom, Teams, etc.)</li>
+            <li><strong>No camera found:</strong> Check if camera is connected and enabled</li>
+        </ul>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const statusDiv = document.getElementById('status');
+        const debugDiv = document.getElementById('debug');
+        let stream = null;
+
+        function log(message, type = 'info') {
+            console.log(message);
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            updateDebug();
+        }
+
+        function updateDebug() {
+            const info = {
+                'Browser': navigator.userAgent,
+                'Protocol': window.location.protocol,
+                'Host': window.location.host,
+                'MediaDevices API': !!navigator.mediaDevices,
+                'getUserMedia': !!navigator.mediaDevices?.getUserMedia,
+                'Camera Stream': stream ? 'Active' : 'Not started',
+                'Video Element': video ? 'Found' : 'Not found',
+                'Video srcObject': video?.srcObject ? 'Set' : 'Not set'
+            };
+            debugDiv.textContent = JSON.stringify(info, null, 2);
+        }
+
+        async function startCamera() {
+            log('🎥 Requesting camera access...', 'info');
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 },
+                        facingMode: 'user'
+                    }
+                });
+                
+                video.srcObject = stream;
+                log('✅ Camera started successfully!', 'success');
+                
+                // Log stream details
+                const tracks = stream.getVideoTracks();
+                console.log('Video tracks:', tracks);
+                if (tracks.length > 0) {
+                    const settings = tracks[0].getSettings();
+                    console.log('Camera settings:', settings);
+                }
+            } catch (err) {
+                console.error('Camera error:', err);
+                log(`❌ Camera error: ${err.name} - ${err.message}`, 'error');
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                stream = null;
+                log('⏹️ Camera stopped', 'info');
+            }
+        }
+
+        async function checkPermissions() {
+            try {
+                const result = await navigator.permissions.query({ name: 'camera' });
+                log(`📹 Camera permission: ${result.state}`, result.state === 'granted' ? 'success' : 'info');
+                
+                result.addEventListener('change', () => {
+                    log(`📹 Camera permission changed to: ${result.state}`, 'info');
+                });
+            } catch (err) {
+                log('⚠️ Permissions API not supported in this browser', 'info');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', () => {
+            updateDebug();
+            log('👋 Ready! Click "Start Camera" to begin', 'info');
+        });
+    </script>
+</body>
+</html>
