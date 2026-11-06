@@ -1,15 +1,39 @@
 # 🩺 ArogyaMitra – AI-Powered Fitness & Wellness Platform
 
-ArogyaMitra is a full-stack AI-powered fitness and wellness platform that delivers personalized workout plans, Indian nutrition guidance, intelligent progress tracking, and an AI chatbot coach — all in one integrated system.
+[![Live App](https://img.shields.io/badge/Live_App-arogya--mitra--jade.vercel.app-10B981?style=for-the-badge&logo=vercel)](https://arogya-mitra-jade.vercel.app/)
+[![API Backend](https://img.shields.io/badge/API_Status-Online-0284C7?style=for-the-badge&logo=fastapi)](https://arogyamitra-api-12n2.onrender.com/)
+[![Built with React](https://img.shields.io/badge/Frontend-React_18_+_Vite-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Powered by Groq](https://img.shields.io/badge/AI_Engine-Groq_Llama_3.3_70B-F97316?style=for-the-badge)](https://groq.com/)
+
+ArogyaMitra is a full-stack AI-powered fitness and wellness platform that delivers personalized workout plans, Indian nutrition guidance, intelligent progress tracking, real-time pose tracking, and an AI chatbot coach — all in one integrated system.
 
 Built with React + FastAPI + Groq (Llama 3.3 70B), the platform provides a complete digital wellness experience with gamification and charity-driven motivation.
+
+🔗 **Live Website**: [https://arogya-mitra-jade.vercel.app/](https://arogya-mitra-jade.vercel.app/)  
+🔗 **Live API Backend**: [https://arogyamitra-api-12n2.onrender.com/](https://arogyamitra-api-12n2.onrender.com/)
+
+---
+
+## 📸 App Screenshots & Preview
+
+| 📊 Central Health Dashboard & Google Calendar | 🥗 Dynamic Macro Architecture & Controls |
+| :---: | :---: |
+| <img src="assets/screenshots/01-dashboard.jpg" alt="Health Dashboard" width="500"/> | <img src="assets/screenshots/02-macro-rings.jpg" alt="Macro Rings" width="500"/> |
+
+| 🍲 Personalized Indian Meal Architecture & BigBasket | 📈 Progress Analytics & Rewards Hub |
+| :---: | :---: |
+| <img src="assets/screenshots/03-meal-plans.jpg" alt="Indian Meal Architecture" width="500"/> | <img src="assets/screenshots/04-progress-analytics.png" alt="Progress Analytics" width="500"/> |
+
+| 🤖 AROMI AI Wellness Coach (Powered by Groq High-Speed LLM) |
+| :---: |
+| <img src="assets/screenshots/05-ai-coach.png" alt="AROMI AI Wellness Coach" width="800"/> |
 
 ---
 
 ## 🚀 Live Features
 
-* 🏋️ **AI-Generated 7-Day Workout Plans** & Form Tutorial Guides
-* 🥗 **AI-Customized Indian Nutrition Plans** with Macro Tracking (Calories, Protein, Carbs, Fat)
+* 🏋️ **AI-Generated 7-Day Workout Plans** & YouTube Form Tutorial Guides
+* 🥗 **AI-Customized Indian Nutrition Plans** with Dynamic Macro Tracking (Calories, Protein, Carbs, Fat)
 * 📷 **AI Motion Tracking / Pose Detection** for Real-Time Exercise Reps
 * 📊 **Real-Time Progress Tracking & Analytics** with Streaks & Milestones
 * 🤖 **AI Chatbot Coach (ARO-mi)** for Personalized Recommendations
@@ -17,18 +41,6 @@ Built with React + FastAPI + Groq (Llama 3.3 70B), the platform provides a compl
 * 📅 **Automatic Google Calendar Sync** for Daily Workouts & Meal Reminders
 * 🛒 **Smart Weekly Shopping List Generator** with BigBasket 1-Click Cart
 * 🔐 **Secure JWT Authentication**
-
----
-
-## 📸 Screenshots & Preview
-
-| 🏋️ AI Pose Detection Rep Tracker | 🥗 Dynamic Macro Architecture |
-| :---: | :---: |
-| *(Add your screenshot here)* | *(Add your screenshot here)* |
-
-| 📊 Central Health Dashboard | 📅 Google Calendar Auto-Sync |
-| :---: | :---: |
-| *(Add your screenshot here)* | *(Add your screenshot here)* |
 
 ---
 
@@ -56,10 +68,11 @@ Chat with ARO-mi for Guidance
 
 ## 🛠 Tech Stack
 
-* **Frontend**: React, Vite, Tailwind CSS, Framer Motion, Lucide Icons
-* **Backend**: FastAPI, SQLAlchemy, SQLite / PostgreSQL
+* **Frontend**: React 18, Vite, Tailwind CSS, Framer Motion, Lucide Icons
+* **Backend**: FastAPI, SQLAlchemy, SQLite / PostgreSQL, Uvicorn
 * **AI & LLM**: Groq Cloud (Llama 3.3 70B)
 * **Integrations**: Google Calendar API, YouTube Data API, BigBasket Cart
+* **Hosting**: Vercel (Frontend), Render (Backend)
 * **Auth**: Secure JWT Authentication (OAuth2)
 
 ---
@@ -68,6 +81,14 @@ Chat with ARO-mi for Guidance
 
 ```text
 ArogyaMitra/
+│
+├── assets/             # Screenshots, previews, and diagrams
+│   └── screenshots/
+│       ├── 01-dashboard.jpg
+│       ├── 02-macro-rings.jpg
+│       ├── 03-meal-plans.jpg
+│       ├── 04-progress-analytics.png
+│       └── 05-ai-coach.png
 │
 ├── backend/            # FastAPI Python backend (routes, models, services)
 ├── frontend/           # React + Vite frontend (pages, components, stores)
