@@ -8,9 +8,9 @@ sqlalchemy>=2.0.25
 alembic>=1.13.1
 
 # Authentication & Security
-passlib[bcrypt]>=1.7.4
+bcrypt>=4.0.1
 python-jose[cryptography]>=3.3.0
-bcrypt>=4.1.2
+
 
 # Environment & Config
 python-dotenv>=1.0.0
